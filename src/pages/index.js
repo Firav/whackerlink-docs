@@ -12,6 +12,7 @@ function HomepageHeader() {
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
+        <img src="static/whackerlink-logo.png" class="container" alt="WhackerLink Logo"></img>
         <Heading as="h1" className="hero__title">
           {siteConfig.title}
         </Heading>
