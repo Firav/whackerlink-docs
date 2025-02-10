@@ -102,6 +102,11 @@ const config = {
           },
         ],
       },
+      colorMode: {
+        defaultMode: 'dark',
+        disableSwitch: true,
+        respectPrefersColorScheme: false,
+      },
       footer: {
         style: 'dark',
         links: [
@@ -145,10 +150,11 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} WhackerLink Docs, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} WhackerLink. Built with Docusaurus.`,
       },
       prism: {
         theme: prismThemes.dracula,
+        darkTheme: prismThemes.dracula,
       },
     }),
 };
