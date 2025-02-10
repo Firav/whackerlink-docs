@@ -4,27 +4,34 @@
  * work well for content-centric websites.
  */
 
-/* You can override the default Infima variables here. */
+/* WhackerLink Docusaurus Theme */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-color-primary: #ff0000; /* Red from the logo */
+  --ifm-color-primary-dark: #cc0000; /* Darker Red for contrast */
+  --ifm-color-primary-darker: #990000; /* Even Darker Red */
+  --ifm-color-primary-darkest: #660000; /* Deepest Red */
+  --ifm-color-primary-light: #ff3333; /* Lighter Red */
+  --ifm-color-primary-lighter: #ff6666; /* Even Lighter Red */
+  --ifm-color-primary-lightest: #ff9999; /* Softest Red */
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1); /* Subtle highlight */
+  
+  /* Background and Text Adjustments */
+  --ifm-background-color: #ffffff; /* White Background */
+  --ifm-font-color-base: #000000; /* Black Text for Readability */
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* Dark Mode Adjustments */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #ff6666; /* Softer Red for Dark Mode */
+  --ifm-color-primary-dark: #ff3333;
+  --ifm-color-primary-darker: #ff0000;
+  --ifm-color-primary-darkest: #cc0000;
+  --ifm-color-primary-light: #ff9999;
+  --ifm-color-primary-lighter: #ffcccc;
+  --ifm-color-primary-lightest: #ffeeee;
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.2); /* Light highlight */
+  
+  --ifm-background-color: #000000; /* Black Background */
+  --ifm-font-color-base: #ffffff; /* White Text for Readability */
 }
