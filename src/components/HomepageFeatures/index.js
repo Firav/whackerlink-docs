@@ -4,32 +4,32 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'In-Game Radio Integration',
+    Svg: require('@site/static/img/radio.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        WhackerLink provides seamless in-game radio communication, allowing players to interact as they would with real-life radio systems. 
+        This feature enhances the authenticity of role-playing scenarios by simulating realistic radio transmissions. 
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Dispatch Console Connectivity',
+    Svg: require('@site/static/img/headset.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        WhackerLink has the ability for a dispatch console to connects with in-game radios, enabling dispatchers to communicate directly with players. 
+        This setup facilitates coordinated operations and efficient management of role-playing activities.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'P25 Paging System',
+    Svg: require('@site/static/img/pager.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        WhackerLink features a P25 paging system that allows dispatchers to send pages from the console to in-game radios. 
+        This function is useful for alerting specific players or groups about important events or calls to action within the game environment
       </>
     ),
   },
