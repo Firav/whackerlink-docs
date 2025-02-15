@@ -86,9 +86,8 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Getting Started',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://github.com/WhackerLink',
             label: 'GitHub',
@@ -129,19 +128,11 @@ const config = {
                 label: 'Discord',
                 href: 'https://discord.gg/FeQMmc33VV',
               },
-              {
-                label: 'GitHub',
-                href: 'https://github.com/WhackerLink',
-              },
             ],
           },
           {
             title: 'More',
             items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
               {
                 label: 'GitHub',
                 href: 'https://github.com/WhackerLink',
