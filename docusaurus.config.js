@@ -149,7 +149,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} WhackerLink. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} WhackerLink.`,
       },
       prism: {
         theme: prismThemes.dracula,
