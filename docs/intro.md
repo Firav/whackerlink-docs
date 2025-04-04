@@ -1,47 +1,121 @@
 ---
 sidebar_position: 1
 ---
+# WhackerLink Server Installation Guide
 
-# Tutorial Intro
+## Installing the WhackerLink Server Instance
 
-Let's discover **Docusaurus in less than 5 minutes**.
+### 1. Install Dependencies
 
-## Getting Started
+Before running WhackerLink, ensure the following are installed:
 
-Get started by **creating a new site**.
+- [.NET 8.0 Runtime](https://aka.ms/dotnet-core-applaunch?missing_runtime=true&arch=x64&rid=win-x64&os=win10&apphost_version=8.0.11)
+- [ASP.NET Core Framework](https://aka.ms/dotnet-core-applaunch?framework=Microsoft.AspNetCore.App&framework_version=8.0.0&arch=x64&rid=win-x64&os=win10)
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+---
 
-### What you'll need
+### 2. Download the Server
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+- Download the latest repository from [whackerlink_v4](https://github.com/WhackerLink/whackerlink_v4/archive/refs/heads/main.zip).
+- Save the folder to a convenient location (e.g., `Downloads` or `Desktop`).
 
-## Generate a new site
+---
 
-Generate a new Docusaurus site using the **classic template**.
+### 3. Prepare to Run the Server
 
-The classic template will automatically be added to your project after you run the command:
+#### Open Command Prompt:
 
-```bash
-npm init docusaurus@latest my-website classic
+- Press `Win + R`, type `cmd`, and press `Enter`.
+
+#### Navigate to the Server Directory:
+
+Depending on where you downloaded the server:
+
+- **Downloads:**
+
+  ```cmd
+  cd %USERPROFILE%\Downloads\WhackerLinkServer
+  ```
+
+- **Desktop:**
+
+  ```cmd
+  cd %USERPROFILE%\Desktop\WhackerLinkServer
+  ```
+
+- **Other Location:**
+
+  Replace the path accordingly:
+
+  ```cmd
+  cd path\to\WhackerLinkServer
+  ```
+
+---
+
+### 4. Run the Server
+
+Run the server with the default configuration:
+
+```cmd
+WhackerLinkServer.exe -c config.example.yml
 ```
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+---
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+## Configuring WhackerLink v4 Server
 
-## Start your site
+### 1. Locate and Edit the Configuration File
 
-Run the development server:
+- In the server root directory, open `config.example.yml`.
 
-```bash
-cd my-website
-npm run start
-```
+By default, the server is configured to run a **single instance**, which is sufficient for most use cases.
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+---
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+### 2. Master Server Configuration
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+- Find the `masters` section.
+- Edit the `name` field to your desired name.  
+  *This name appears in services such as the FiveM radio and the server console.*
+
+---
+
+### 3. Network Configuration
+
+#### Ports
+
+- Default port: `3000`
+- Ensure **TCP and UDP** traffic is allowed through:
+  - Your **Windows Firewall**
+  - Your **Router** (if self-hosting from home)
+
+:::note
+If you're using a **VPS** or **dedicated hosting**, port forwarding is typically pre-configured.
+:::
+
+#### Address Binding
+
+- Modify the `address` field:
+  - For **VPS**, use the **public IP address**
+  - For **local hosting**, use your **internal IPv4** or appropriately routed IP (0.0.0.0 or 127.0.0.1)
+
+:::tip
+Avoid using `localhost` for the address value, as its been noted to cause issues with traffic routing.
+:::
+
+---
+
+### 4. Authentication Keys
+
+- In the root directory, find and open `auth_keys.yml`.
+
+Authentication keys are **required** for secure communication between external modules and your WhackerLink server instance.
+
+> 🔒 More detailed information on setting up auth keys will be provided soon.
+
+---
+
+## Need Help?
+
+Join our [Discord community](https://discord.gg/FeQMmc33VV) for support, live assistance, and updates.
