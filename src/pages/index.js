@@ -6,6 +6,7 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
+import {useEffect} from 'react';
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
@@ -30,15 +31,8 @@ function HomepageHeader() {
 }
 
 export default function Home() {
-  const {siteConfig} = useDocusaurusContext();
-  return (
-    <Layout
-      title={`${siteConfig.title}`}
-      description="WhackerLink Radio Documentation">
-      <HomepageHeader />
-      <main>
-        <HomepageFeatures />
-      </main>
-    </Layout>
-  );
+  useEffect(() => {
+    window.location.replace('/docs/intro');
+  }, []);
+  return null;
 }
