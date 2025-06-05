@@ -32,7 +32,7 @@ function HomepageHeader() {
 
 export default function Home() {
   useEffect(() => {
-    window.location.replace('/docs/intro');
+    window.location.replace('/whackerlink-docs/docs/intro');
   }, []);
   return null;
 }
