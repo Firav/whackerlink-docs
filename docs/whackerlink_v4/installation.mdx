@@ -1,0 +1,177 @@
+---
+sidebar_position: 1
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Installation
+
+WhackerLink can be installed on both **Windows** and **Linux** systems. This guide provides step-by-step instructions for each platform, so you can choose the one that best fits your environment.
+
+:::warning
+Previous experience with self-hosting applications is recommended. If you are unfamiliar with server setup or command-line tools, you may find this process challenging. In that case, consider using a [managed hosting service](/whackerlink-docs/docs/whackerlink_v4/) instead of self-hosting WhackerLink.
+:::
+
+<Tabs>
+  <TabItem value="windows" label="🪟 Windows" default>
+## Windows - Installing the WhackerLink Server Instance
+
+### 1. Install Dependencies
+
+Before running WhackerLink, ensure the following are installed:
+
+- [.NET 8.0 Runtime](https://aka.ms/dotnet-core-applaunch?missing_runtime=true&arch=x86&rid=win-x86&os=win10&apphost_version=8.0.13)
+- [ASP.NET Core Framework](https://aka.ms/dotnet-core-applaunch?framework=Microsoft.AspNetCore.App&framework_version=8.0.0&arch=x86&rid=win-x86&os=win10)
+- [MS VC Redistributable](https://aka.ms/vs/17/release/vc_redist.x86.exe)
+
+---
+
+### 2. Download and unpackage the Server
+
+- Download the latest repository from [whackerlink_v4](https://github.com/WhackerLink/whackerlink_v4/releases).
+- Save the folder to a convenient location (e.g., `Downloads` or `Desktop`).
+
+#### Unzip the downloaded release
+
+- Decompress these files in a convenient location (e.g., `Downloads` or `Desktop`). Please note the directory that you export these files to, as we'll use it in the next step.
+
+---
+
+### 3. Prepare to Run the Server
+
+#### Open Command Prompt:
+
+- Press `Win + R`, type `cmd`, and press `Enter`.
+
+#### Navigate to the Server Directory:
+
+Depending on where you downloaded the server:
+
+- **Downloads:**
+
+```cmd
+cd %USERPROFILE%\Downloads\WhackerLinkServer
+```
+
+- **Desktop:**
+
+```cmd
+cd %USERPROFILE%\Desktop\WhackerLinkServer
+```
+
+- **Other Location:**
+
+Replace the path accordingly:
+
+```cmd
+cd path\to\WhackerLinkServer
+```
+
+---
+
+### 4. Run the Server
+
+Run the server with the default configuration:
+
+```cmd
+.\WhackerLinkServer.exe -c configs\config.example.yml
+```
+
+---
+
+## Need Help?
+
+Join our [Discord community](https://discord.gg/FeQMmc33VV) for support, live assistance, and updates.
+:::note
+WhackerLink is a free, open-source project maintained by volunteers. Support is provided as time allows, but response times may vary. Please be patient when seeking assistance.
+:::
+
+  </TabItem>
+  <TabItem value="linux" label="🐧 Linux" default>
+## Linux - Installing the WhackerLink Server Instance
+
+### 1. Install Dependencies
+
+```bash
+wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
+
+sudo apt-get update
+sudo apt-get install -y dotnet-sdk-8.0 aspnetcore-runtime-8.0 dotnet-runtime-8.0 git
+```
+
+---
+
+### 2. Build WhackerLink
+
+```bash
+git clone https://github.com/whackerlink/whackerlink_v4 --recurse-submodules
+cd whackerlink_v4
+
+dotnet build WhackerLinkServer --configuration Linux
+dotnet build WhackerLinkBridge --configuration Linux
+dotnet build WhackerLink2Dvm --configuration Linux
+
+sudo mkdir ../whackerlink-built
+sudo cp WhackerLinkServer/bin/Linux/* ../whackerlink-built/ -r
+sudo cp WhackerLink2Dvm/bin/Linux/* ../whackerlink-built/ -r
+sudo cp WhackerLinkBridge/bin/Linux/* ../whackerlink-built/ -r
+
+sudo cp WhackerLinkServer/configs/* ../whackerlink-built/configs
+sudo cp WhackerLink2Dvm/configs/config.example.yml ../whackerlink-built/configs/whackerlinkdvm-config.yml
+sudo cp WhackerLinkBridge/configs/config.example.yml ../whackerlink-built/configs/whackerlinkbridge-config.yml
+
+cd ../whackerlink-built
+```
+
+---
+
+### 3. Install the Precompiled Vocoder
+
+```bash
+mkdir -p /tmp/vocoder_temp && cd /tmp/vocoder_temp
+
+sudo apt install curl
+curl -L -O https://github.com/DVMProject/dvmvocoder/releases/download/v0.1/libvocoder-v0.1-linux.tar.gz
+tar -xzf libvocoder-v0.1-linux.tar.gz
+sudo cp libvocoder.so "$OLDPWD"
+cd "$OLDPWD"
+rm -rf /tmp/vocoder_temp
+```
+
+---
+
+### 4. Compile the Vocoder from Source (If the precompiled causes issues)
+
+```bash
+cd ..
+git clone https://github.com/WhackerLink/dvmvocoder/
+cd dvmvocoder
+sudo apt install build-essential cmake
+mkdir build && cd build
+cmake ..
+make
+
+sudo cp libvocoder.so ../../whackerlink-built/
+cd ../../whackerlink-built
+```
+
+---
+
+### 5. Run the Server
+
+```bash
+sudo ./WhackerLinkServer -c configs/config.example.yml
+```
+
+---
+
+## Need Help?
+
+Join our [Discord community](https://discord.gg/FeQMmc33VV) for support, live assistance, and updates.
+:::note
+WhackerLink is a free, open-source project maintained by volunteers. Support is provided as time allows, but response times may vary. Please be patient when seeking assistance.
+:::
+  </TabItem>
+</Tabs>

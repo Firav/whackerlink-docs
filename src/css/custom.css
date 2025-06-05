@@ -35,3 +35,37 @@
   --ifm-background-color: #000000; /* Black Background */
   --ifm-font-color-base: #ffffff; /* White Text for Readability */
 }
+
+.tableButton {
+  min-width: 180px;
+  max-width: 220px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0.3em 1em;
+  white-space: nowrap;
+  font-size: 0.95em;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.tableButton--primary {
+  background: var(--ifm-color-primary);
+  color: #fff;
+}
+
+.tableButton--secondary {
+  background: #f3f3f3;
+  color: #222;
+  border: 1px solid #ccc;
+}
+
+.tableButton:active {
+  opacity: 0.85;
+}

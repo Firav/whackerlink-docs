@@ -1,3 +1,4 @@
+# Configuration
 ## Configuring WhackerLink v4 Server
 
 ### 1. Locate and Edit the Configuration File
@@ -18,7 +19,30 @@ By default, the server is configured to run a **single instance**, which is suff
 
 ### 3. Network Configuration
 
-#### Ports
+Configuring network settings may be challenging depending on your network setup and the number of firewalls in place.
+
+```yaml
+    # Port for the master to bind to
+      # Manually open this port in Windows Advanced Firewall, TCP port type.
+      # If hosted locally, this port needs to be open on your firewall and forwarded to the internal IP of the server.
+    port: 3000
+    # Address for the master to bind to
+      # If hosted locally, bind to internal IP (0.0.0.0, 127.0.0.1, or private IP (Interal Network IP))
+      # If hosted remotely on a VPS, bind to the Public IP of your VPS.
+    address: 0.0.0.0
+```
+
+#### Setting the Address
+
+- Modify the `address` field:
+  - For **VPS**, use the **public IP address**
+  - For **local hosting**, use your **internal IPv4** or appropriately routed IP (0.0.0.0 or 127.0.0.1)
+
+:::tip
+Avoid using `localhost` for the address value, as its been noted to cause issues with traffic routing.
+:::
+
+#### Port Setup
 
 - Default port: `3000`
 - Ensure **TCP and UDP** traffic is allowed through:
@@ -27,16 +51,6 @@ By default, the server is configured to run a **single instance**, which is suff
 
 :::note
 If you're using a **VPS** or **dedicated hosting**, port forwarding is typically pre-configured.
-:::
-
-#### Address Binding
-
-- Modify the `address` field:
-  - For **VPS**, use the **public IP address**
-  - For **local hosting**, use your **internal IPv4** or appropriately routed IP (0.0.0.0 or 127.0.0.1)
-
-:::tip
-Avoid using `localhost` for the address value, as its been noted to cause issues with traffic routing.
 :::
 
 ---
