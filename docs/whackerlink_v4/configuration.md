@@ -1,3 +1,6 @@
+---
+sidebar_position: 2
+---
 # Configuration
 ## Configuring WhackerLink v4 Server
 
