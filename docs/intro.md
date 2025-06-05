@@ -160,5 +160,5 @@ You can modify the `reloadInterval` to your liking. This interval is measured in
 
 Join our [Discord community](https://discord.gg/FeQMmc33VV) for support, live assistance, and updates.
 :::note
-WhackerLink is a free, open-source project. While support is offered for this project, please understand that it's not our full time job! We do this on the side as a hobby. Response times for support can vary greatly. Please be patient when looking for support.
+WhackerLink is a free, open-source project maintained by volunteers. Support is provided as time allows, but response times may vary. Please be patient when seeking assistance.
 :::
