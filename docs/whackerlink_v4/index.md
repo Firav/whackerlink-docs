@@ -37,11 +37,11 @@ Placeholder text
   </tbody>
 </table>
 
-<div style={{ display: 'flex', justifyContent: 'space-around', marginTop: 32 }}>
-  <a className="button button--secondary" href="https://smokyridge.solutions/" style={{ minWidth: 180, textAlign: 'center' }}>
+<div style="display: flex; justify-content: space-around; margin-top: 32px;">
+  <a className="button button--secondary" href="https://smokyridge.solutions/" style="min-width: 180px; text-align: center;">
     Get started with Smoky Ridge
   </a>
-  <a className="button button--primary" href="/docs/whackerlink_v4/installation" style={{ minWidth: 180, textAlign: 'center' }}>
+  <a className="button button--primary" href="/docs/whackerlink_v4/installation" style="min-width: 180px; text-align: center;">
     Self-Host Installation
   </a>
 </div>
