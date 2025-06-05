@@ -2,6 +2,9 @@
 sidebar_position: 2
 ---
 # Configuration
+
+The next part in your WhackerLinkServer journey is configuring the instance to suit your needs. This guide will provide a brief overview of the neccessary portions of running a WhackerLinkServer. If you'd like assistance with the full configuration, please visit the advanced configuration docs for more information.
+
 ## Configuring WhackerLink v4 Server
 
 ### 1. Locate and Edit the Configuration File
