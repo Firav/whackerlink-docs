@@ -1,0 +1,8 @@
+{
+  "label": "WhackerLink v4",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Documentation for installing and configuring the WhackerLink v4 server instance."
+  }
+}
