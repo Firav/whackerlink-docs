@@ -39,7 +39,7 @@ Configuring network settings may be challenging depending on your network setup 
 ```
 
 :::danger
-Hosting WhackerLink Server on your personal computer or home network exposes your IP address to anyone who connects, which poses a security risk. Make sure you understand these implications before deploying on a personal network.
+Hosting WhackerLink Server on your personal computer or home network exposes your IP address to anyone who connects, which poses a security risk. Make sure you [understand these implications](https://www.tomsguide.com/computing/online-security/what-can-someone-do-with-my-ip-address) before deploying on a personal network.
 :::
 
 #### Setting the Address
