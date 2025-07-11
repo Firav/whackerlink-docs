@@ -38,6 +38,10 @@ Configuring network settings may be challenging depending on your network setup 
     address: 0.0.0.0
 ```
 
+:::danger
+Hosting WhackerLink Server on your personal computer or home network exposes your IP address to anyone who connects, which poses a security risk. Make sure you understand these implications before deploying on a personal network.
+:::
+
 #### Setting the Address
 
 - Modify the `address` field:
