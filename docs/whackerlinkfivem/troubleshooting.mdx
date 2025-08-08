@@ -1,0 +1,411 @@
+# Troubleshooting
+
+:::danger
+This content is AI generated and may not be accurate. This page is still under development.
+:::
+
+Common issues, error messages, and solutions to help you resolve problems with WhackerLinkFiveM.
+
+## Installation Issues
+
+### Resource Not Loading
+
+#### Symptoms
+- WhackerLinkFiveM not appearing in server resources
+- No startup message in server console
+- Commands not working
+
+#### Solutions
+1. **Check file placement**:
+   ```
+   resources/
+   └── WhackerLinkFiveM/
+       ├── fxmanifest.lua
+       ├── client/
+       ├── server/
+       └── configs/
+   ```
+
+2. **Verify server.cfg**:
+   ```bash
+   ensure WhackerLinkFiveM
+   ```
+
+3. **Check console for errors**:
+   - Look for YAML parsing errors
+   - Verify file permissions
+   - Check for missing dependencies
+
+#### Error Messages
+```
+Error parsing YAML file: configs/config.yml
+```
+**Solution**: Check YAML syntax, ensure proper indentation (spaces, not tabs)
+
+```
+Resource 'WhackerLinkFiveM' failed to start
+```
+**Solution**: Check fxmanifest.lua syntax and file paths
+
+### Configuration File Errors
+
+#### Invalid YAML Syntax
+```
+Error loading codeplugs: YAMLException: bad indentation
+```
+**Solutions**:
+- Use spaces instead of tabs
+- Maintain consistent indentation (2 or 4 spaces)
+- Validate YAML syntax online
+- Check for missing colons or quotes
+
+#### Missing Configuration Files
+```
+Error loading sites config: ENOENT: no such file or directory
+```
+**Solutions**:
+- Ensure all config files exist in `configs/` folder
+- Copy from example configurations  
+- Check file naming (case sensitive)
+
+## Connection Issues
+
+### Cannot Connect to WhackerLink Server
+
+#### Symptoms
+- "Site trunking" message persists
+- No voice communication
+- Radio shows "out of range" constantly
+
+#### Diagnostic Steps
+1. **Verify server address in codeplug**:
+   ```yaml
+   systems:
+     - name: "Main System"
+       address: "correct-server-address.com"
+       port: 3000
+   ```
+
+2. **Test network connectivity**:
+   ```bash
+   # From server machine, test connection
+   telnet your-whackerlink-server.com 3000
+   ```
+
+3. **Check authentication key**:
+   ```yaml
+   systems:
+     - name: "Main System"
+       authKey: "correct-auth-key-here"
+   ```
+
+#### Common Connection Errors
+
+```
+WebSocket connection failed
+```
+**Causes**:
+- WhackerLink server is offline
+- Firewall blocking connection
+- Incorrect server address/port
+- Invalid authentication key
+
+**Solutions**:
+- Verify WhackerLink server is running
+- Check firewall rules
+- Confirm server address and port
+- Verify authentication key matches server
+
+### Authentication Failures
+```
+Authentication failed: Invalid auth key
+```
+**Solutions**:
+- Check auth key in codeplug matches server
+- Ensure no extra spaces in auth key
+- Verify server-side authentication settings
+
+## Audio Issues  
+
+### No Voice Communication
+
+#### PTT Not Working
+**Symptoms**: PTT key doesn't transmit, no TX indicator
+
+**Solutions**:
+1. **Check keybind configuration**:
+   - F1 → Settings → Key Bindings
+   - Find "WhackerLinkFiveM" section
+   - Set PTT keybind
+
+2. **Verify microphone permissions**:
+   - Allow FiveM microphone access
+   - Test microphone in other applications
+   - Check Windows privacy settings
+
+3. **Confirm radio setup**:
+   ```bash
+   /set_rid 1234
+   /set_codeplug your-codeplug
+   ```
+
+#### Can't Hear Others
+**Symptoms**: Others can hear you, but you can't hear them
+
+**Solutions**:
+1. **Check volume settings**:
+   - Increase radio volume with volume buttons
+   - Check FiveM audio settings
+   - Verify system audio levels
+
+2. **Test different channel**:
+   - Switch zones/channels
+   - Verify others are on same talkgroup
+
+### Audio Quality Issues
+
+#### Distorted/Choppy Audio
+**Causes**:
+- Network latency/packet loss
+- Server performance issues
+- Client-side performance problems
+
+**Solutions**:
+- Check network connection quality
+- Monitor server performance
+- Close unnecessary applications
+- Lower FiveM graphics settings
+
+#### Audio Delay/Latency
+**Solutions**:
+- Reduce network buffering
+- Use wired internet connection
+- Close bandwidth-heavy applications
+- Consider dedicated server hosting
+
+## Interface Issues
+
+### Radio Interface Not Opening
+
+#### Symptoms
+- `/toggle_radio` command doesn't work
+- Keybind not opening radio
+- Black screen when opening radio
+
+#### Solutions
+1. **Verify resource status**:
+   ```bash
+   # In server console
+   restart WhackerLinkFiveM
+   ```
+
+2. **Check for conflicts**:
+   - Disable other radio resources
+   - Test without other UI mods
+   - Check for JavaScript errors in F8 console
+
+3. **Clear FiveM cache**:
+   - Close FiveM completely
+   - Delete cache folder in FiveM directory
+   - Restart FiveM and reconnect
+
+### Display Problems
+
+#### Radio Model Not Loading
+**Symptoms**: Default radio appearance, missing interface elements
+
+**Solutions**:
+1. **Check codeplug radio model**:
+   ```yaml
+   radioWide:
+     model: "APX6000"  # Must match available models
+   ```
+
+2. **Verify available models**:
+   - APX6000, APX7000, APX8000XE
+   - APX4500, XTL2500 (mobile)
+   - SRX2200 (scanner)
+
+3. **Clear browser cache**:
+   - F8 console in FiveM
+   - Type: `window.location.reload()`
+
+#### Missing UI Elements
+**Solutions**:
+- Verify all resource files are present
+- Check for JavaScript errors (F8 console)
+- Ensure proper screen resolution support
+
+## Gameplay Issues
+
+### Emergency System Problems
+
+#### Emergency Not Working
+**Symptoms**: Emergency button doesn't activate, no emergency alert
+
+**Solutions**:
+1. **Check emergency cooldown**:
+   - Wait 30+ seconds between emergency activations
+   - Emergency may be on cooldown
+
+2. **Verify connection**:
+   - Must be connected to WhackerLink server
+   - Check signal strength (RSSI)
+
+3. **Test emergency command**:
+   ```bash
+   /emergency_toggle
+   ```
+
+### Scanning Issues
+
+#### Scan Not Working
+**Symptoms**: Scan button doesn't function, no scanning activity
+
+**Solutions**:
+1. **Check scan list configuration**:
+   ```yaml
+   scanLists:
+     - name: "Police Scan"
+       channels:
+         - "PD Dispatch"
+         - "PD Tactical"
+   ```
+
+2. **Verify channel membership**:
+   - Channels in scan list must exist in zones
+   - Check channel names match exactly
+
+### Battery/Power Issues
+
+#### Battery Drains Too Fast
+**Solutions**:
+- Adjust battery drain interval in config
+- Use mobile radio models (no battery drain)
+- Monitor idle time
+
+#### Radio Powers Off Unexpectedly
+**Causes**:
+- Battery depleted
+- Server resource restart
+- Connection timeout
+
+**Solutions**:
+```bash
+/change_battery  # Reset battery level
+```
+
+## Server Performance Issues
+
+### High CPU/Memory Usage
+
+#### Server-Side Performance
+**Monitoring**:
+- Check FiveM server resources
+- Monitor WhackerLink server performance
+- Watch for memory leaks
+
+**Solutions**:
+- Limit concurrent radio users
+- Optimize codeplug configurations
+- Consider dedicated hosting
+
+#### Client-Side Performance
+**Symptoms**: Frame drops when radio is open
+
+**Solutions**:
+- Lower FiveM graphics settings
+- Close unnecessary background applications
+- Update graphics drivers
+
+### Network Issues
+
+#### High Bandwidth Usage
+**Causes**:
+- Many concurrent voice channels
+- High-quality audio streaming
+- Inefficient network usage
+
+**Solutions**:
+- Implement voice channel limits
+- Monitor network utilization
+- Use appropriate audio quality settings
+
+## Error Messages Reference
+
+### Common Error Messages
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| `Make sure you set your radio id!!` | No radio ID configured | Use `/set_rid <id>` |
+| `No codeplug loaded` | No codeplug assigned | Use `/set_codeplug <name>` |
+| `Site trunking` | Connecting to server | Wait or move to coverage area |
+| `Fail 01/12` | Codeplug loading error | Check codeplug syntax |
+| `Fail 01/82` | Zone/channel error | Verify zone configuration |
+
+### Debug Mode
+
+Enable detailed logging for troubleshooting:
+
+#### Enable Debug in config.yml
+```yaml
+debug:
+  enabled: true
+  verboseLogging: true
+```
+
+#### Console Commands for Debug
+```bash
+# View debug information
+# Check browser console (F8) for detailed logs
+```
+
+## Getting Help
+
+### Before Seeking Support
+
+1. **Check this troubleshooting guide**
+2. **Verify all configuration files**
+3. **Test with minimal configuration**
+4. **Check server and client console logs**
+5. **Test with other players/resources disabled**
+
+### Information to Provide
+
+When asking for help, include:
+- WhackerLinkFiveM version
+- FiveM server version
+- Error messages (exact text)
+- Configuration files (sanitized)
+- Steps to reproduce the issue
+- Server/client console logs
+
+### Support Channels
+
+- **Discord Community**: [WhackerLink Discord](https://discord.gg/FeQMmc33VV)
+- **GitHub Issues**: [WhackerLinkFiveM Issues](https://github.com/WhackerLink/WhackerLinkFiveM/issues)
+- **Documentation**: Review this documentation thoroughly
+
+### Creating Bug Reports
+
+Include in your GitHub issue:
+1. **Clear description** of the problem
+2. **Steps to reproduce** the issue
+3. **Expected vs actual behavior**
+4. **Configuration files** (remove sensitive data)
+5. **Console logs** (server and client)
+6. **Environment details** (OS, FiveM version, etc.)
+
+---
+
+:::tip Debug Tips
+Use browser developer tools (F12 in FiveM) to check for JavaScript errors and network issues. This can provide valuable debugging information.
+:::
+
+:::warning Configuration Backup
+Always backup your working configurations before making changes. This allows quick recovery if new configurations cause issues.
+:::
+
+:::note Community Support
+The WhackerLink community is helpful and responsive. Don't hesitate to ask questions in Discord - other users may have encountered similar issues.
+:::

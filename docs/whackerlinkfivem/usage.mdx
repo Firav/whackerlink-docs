@@ -1,0 +1,286 @@
+# How to Use
+
+:::danger
+This content is AI generated and may not be accurate. This page is still under development.
+:::
+
+Learn how to operate WhackerLinkFiveM's radio system effectively, including basic operations, advanced features, and best practices for roleplay scenarios.
+
+## Getting Started
+
+### Initial Setup
+1. **Set your Radio ID**: `/set_rid <your_id>`
+   ```
+   /set_rid 1234
+   ```
+
+2. **Load a Codeplug**: `/set_codeplug <codeplug_name>`
+   ```
+   /set_codeplug police
+   ```
+
+3. **Open the Radio**: Use the configured keybind or `/toggle_radio`
+
+### Basic Radio Interface
+
+When you open the radio, you'll see:
+- **Radio Model**: Visual representation of your assigned radio
+- **Display Screen**: Shows current zone, channel, and status information
+- **Signal Strength**: RSSI indicator showing connection quality
+- **Battery Level**: Current battery status (portable radios only)
+
+## Basic Operations
+
+### Powering On/Off
+- **Power Toggle**: Press the power button on the radio interface
+- **Command**: `/power_toggle` (if keybind is set)
+- **Auto-Power**: Radio powers on automatically when opening interface
+
+### Changing Channels
+- **Channel Up**: Use channel up button or assigned keybind
+- **Channel Down**: Use channel down button or assigned keybind  
+- **Commands**: 
+  ```
+  /channel_up
+  /channel_down
+  ```
+
+### Changing Zones
+- **Zone Up**: Use zone up button or assigned keybind
+- **Zone Down**: Use zone down button or assigned keybind
+- **Commands**:
+  ```
+  /zone_up
+  /zone_down
+  ```
+
+### Push-to-Talk (PTT)
+1. **Hold PTT Key**: Press and hold your configured PTT key
+2. **Voice Transmission**: Speak while holding PTT
+3. **Release PTT**: Release key to stop transmission
+
+**Default PTT behavior**:
+- Red TX indicator shows you're transmitting
+- Other users hear your voice on the same talkgroup
+- Automatic voice grant/release system
+
+## Advanced Features
+
+### Emergency Operations
+
+#### Emergency Activation
+- **Emergency Button**: Press the orange emergency button on radio
+- **Command**: `/emergency_toggle`
+- **Keybind**: Use configured emergency keybind
+
+**Emergency Features**:
+- Sends emergency alarm to dispatch
+- Includes GPS location data
+- Priority transmission capabilities
+- Visual/audio emergency indicators
+
+#### Emergency Response
+When receiving an emergency:
+- Orange emergency indicator appears
+- Emergency tone plays
+- Shows emergency unit ID
+- Automatically clears after 5 seconds
+
+### Scanning Operations
+
+#### Enable Scanning
+- **Scan Button**: Press SCAN button on radio interface
+- **Functionality**: Monitors multiple channels for activity
+- **Priority**: Stops on active channels with traffic
+
+#### Scan Behavior
+- Scans through configured scan list
+- Pauses on active channels
+- Returns to home channel when no activity
+- Yellow indicator shows scanning status
+
+### Signal Status
+
+#### RSSI (Signal Strength)
+- **Check Signal**: Press RSSI button on radio
+- **Display**: Shows current signal strength in dBm
+- **Site Info**: Displays current site ID
+
+**Signal Levels**:
+- **5 bars**: Excellent signal
+- **3-4 bars**: Good signal  
+- **1-2 bars**: Weak signal
+- **0 bars**: Out of range/site trunking
+
+#### Site Trunking
+- **Status**: "Site trunking" displayed when connecting
+- **Behavior**: Radio searching for available sites
+- **Resolution**: Move to area with better coverage
+
+### Volume Controls
+- **Volume Up**: Increase audio volume
+- **Volume Down**: Decrease audio volume
+- **Commands**:
+  ```
+  /volume_up
+  /volume_down
+  ```
+
+## Radio Models and Features
+
+### Portable Radios (APX6000, APX7000, etc.)
+- Full-featured interface
+- Battery indicator
+- Complete button layout
+- Scanning capabilities
+- Emergency functions
+
+### Mobile Radios (APX4500, XTL2500)
+- Vehicle-mounted interface
+- Enhanced display
+- No battery indicator (powered by vehicle)
+- Fixed mounting position
+
+### Scanner Models (SRX2200, UNIG5)
+- Receive-only operation
+- No PTT functionality
+- Enhanced scanning features
+- Multiple display modes
+
+## Commands Reference
+
+### Essential Commands
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/set_rid <id>` | Set your radio ID | `/set_rid 1234` |
+| `/set_codeplug <name>` | Load codeplug configuration | `/set_codeplug police` |
+| `/toggle_radio` | Open/close radio interface | `/toggle_radio` |
+
+### Operational Commands  
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/emergency_toggle` | Activate emergency alarm | `/emergency_toggle` |
+| `/channel_up` | Switch to next channel | `/channel_up` |
+| `/channel_down` | Switch to previous channel | `/channel_down` |
+| `/zone_up` | Switch to next zone | `/zone_up` |
+| `/zone_down` | Switch to previous zone | `/zone_down` |
+
+### Administrative Commands
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/site_status <site> <status>` | Change site status | `/site_status 1 0` |
+| `/clear_codeplug` | Clear current codeplug | `/clear_codeplug` |
+| `/change_battery` | Reset battery level | `/change_battery` |
+
+### Site Status Values
+- **1**: Site online (normal operation)
+- **0**: Site offline (no service)
+- **2**: Site failsoft (limited service)
+
+## Keybinds Configuration
+
+### Default Keybinds
+WhackerLinkFiveM supports customizable keybinds through FiveM's key mapping system:
+
+- **PTT**: Not set by default (configure in FiveM settings)
+- **Toggle Radio**: Not set by default
+- **Emergency**: Not set by default
+- **Channel Up/Down**: Not set by default
+- **Zone Up/Down**: Not set by default
+
+### Setting Up Keybinds
+1. Access FiveM settings (F1 → Settings → Key Bindings)
+2. Find "WhackerLinkFiveM" category
+3. Assign keys for each function:
+   - `whackerlinkfivem_ptt` - Push to Talk
+   - `whackerlinkfivem_radio` - Toggle Radio
+   - `whackerlinkfivem_emergency` - Emergency
+   - `whackerlinkfivem_channel_up` - Channel Up
+   - `whackerlinkfivem_channel_down` - Channel Down
+
+## Roleplay Best Practices
+
+### Radio Discipline
+- **Clear Speech**: Speak clearly and at appropriate volume
+- **Proper Callsigns**: Use assigned callsigns and unit numbers  
+- **Brief Communications**: Keep transmissions concise
+- **Wait for Clear**: Don't interrupt ongoing transmissions
+
+### Emergency Procedures
+- **Emergency Declaration**: Clear statement of emergency type
+- **Location Information**: Provide specific location details
+- **Situation Update**: Brief status of emergency situation
+- **Maintain Communication**: Stay on assigned frequency
+
+### Professional Communications
+```
+Example proper radio traffic:
+"Dispatch, Unit 1-Adam-12"
+"Unit 1-Adam-12, go ahead"
+"Show me 10-8 and available for calls"
+"Copy, Unit 1-Adam-12 10-8 at 1430 hours"
+```
+
+## Troubleshooting In-Game Issues
+
+### Common Problems
+
+#### "No Signal" or "Out of Range"
+- **Cause**: Too far from radio sites
+- **Solution**: Move closer to configured site locations
+- **Check**: Site status with RSSI button
+
+#### "Site Trunking" Message
+- **Cause**: Radio searching for available sites
+- **Solution**: Wait for connection or move to covered area
+- **Duration**: Usually resolves within 2-5 seconds
+
+#### Voice Not Working
+- **Check**: PTT key is properly configured
+- **Verify**: Microphone permissions in FiveM
+- **Confirm**: On correct talkgroup/channel
+- **Test**: Radio ID is properly set
+
+#### Radio Interface Not Opening
+- **Verify**: Resource is running on server
+- **Check**: Keybind assignments
+- **Try**: `/toggle_radio` command
+- **Confirm**: No conflicting resources
+
+### Performance Issues
+
+#### Audio Latency
+- **Reduce**: Background applications
+- **Check**: Network connection quality
+- **Adjust**: FiveM audio settings
+- **Consider**: Server performance
+
+#### Frame Rate Drops
+- **Minimize**: Radio interface when not needed
+- **Disable**: Unnecessary visual effects
+- **Update**: Graphics drivers
+- **Lower**: FiveM graphics settings
+
+## Tips for Server Administrators
+
+### Player Education
+- Provide keybind setup instructions
+- Create radio procedure documentation  
+- Conduct training sessions
+- Monitor radio discipline
+
+### Performance Monitoring
+- Watch for high concurrent usage
+- Monitor server resources
+- Check WhackerLink server performance
+- Plan for peak usage times
+
+---
+
+:::tip Pro Tip
+Practice radio operations in a private server or development environment before using in serious roleplay scenarios. Familiarity with the interface improves immersion and reduces mistakes.
+:::
+
+:::note Realistic Behavior
+WhackerLinkFiveM simulates real P25 radio behavior. Features like site trunking, emergency alarms, and signal strength are designed to provide authentic radio experiences.
+:::

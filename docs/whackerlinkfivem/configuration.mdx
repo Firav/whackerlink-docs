@@ -1,0 +1,346 @@
+# Configuration
+:::danger
+This content is AI generated and may not be accurate. This page is still under development.
+:::
+
+Learn how to configure WhackerLinkFiveM for your specific server needs, including codeplugs, radio models, and server connections.
+
+## Configuration Files Overview
+
+WhackerLinkFiveM uses several YAML configuration files:
+
+- **`configs/config.yml`** - Global resource settings
+- **`configs/sites.yml`** - Site locations and status
+- **`codeplugs/*.yml`** - Radio configurations and talk groups
+
+## Global Configuration (config.yml)
+
+### Audio Settings
+```yaml
+audio:
+  beepVolumeReduction: 0.3    # Reduce UI beep volume (0.0-1.0)
+  voiceTimeout: 30000         # Voice timeout in milliseconds
+```
+
+### Display Settings
+```yaml
+display:
+  blipsEnabled: true          # Show site blips on the map
+  uiTheme: "default"          # UI theme (future use)
+```
+
+### Debug Settings
+```yaml
+debug:
+  enabled: false              # Enable debug logging
+  verboseLogging: false       # Detailed console output
+```
+
+### Example Complete config.yml
+```yaml
+# WhackerLinkFiveM Configuration
+audio:
+  beepVolumeReduction: 0.3
+  voiceTimeout: 30000
+
+display:
+  blipsEnabled: true
+  uiTheme: "default"
+
+debug:
+  enabled: false
+  verboseLogging: false
+
+# Server-specific settings
+server:
+  maxPlayersPerChannel: 50    # Maximum players per radio channel
+  emergencyTimeout: 300000    # Emergency timeout (5 minutes)
+```
+
+## Site Configuration (sites.yml)
+
+Sites represent physical radio tower locations that provide coverage areas.
+
+### Basic Site Structure
+```yaml
+sites:
+  1:                          # Site ID
+    name: "Downtown Tower"     # Display name
+    siteID: 1                 # Numeric site identifier
+    lat: 40.7128              # Latitude coordinate
+    lng: -74.0060             # Longitude coordinate
+    State: 1                  # Site status (1=Online, 0=Offline, 2=Failsoft)
+```
+
+### Multiple Sites Example
+```yaml
+sites:
+  1:
+    name: "Police HQ"
+    siteID: 1
+    lat: 40.7128
+    lng: -74.0060
+    State: 1
+  
+  2:
+    name: "North Tower"
+    siteID: 2
+    lat: 40.7589
+    lng: -73.9851
+    State: 1
+    
+  3:
+    name: "South Station"
+    siteID: 3
+    lat: 40.6892
+    lng: -74.0445
+    State: 2                  # Failsoft mode
+```
+
+### Site States
+- **1 (Online)**: Site is fully operational
+- **0 (Offline)**: Site is down, no coverage
+- **2 (Failsoft)**: Limited functionality, emergency only
+
+## Codeplug Configuration
+
+Codeplugs define the complete radio configuration including systems, zones, channels, and talk groups.
+
+### Basic Codeplug Structure
+```yaml
+# Radio hardware settings
+radioWide:
+  model: "APX6000"            # Portable radio model
+  inCarMode: "APX4500"        # Mobile/vehicle radio model
+
+# WhackerLink server connections  
+systems:
+  - name: "Main System"
+    address: "your-server.com"
+    port: 3000
+    authKey: "your-secret-key"
+
+# Zone and channel organization
+zones:
+  - name: "Police"
+    channels: []
+      
+# Scanning configuration
+scanLists:
+  - name: "Police Scan"
+    channels: []
+```
+
+### Complete Codeplug Example
+
+```yaml
+radioWide:
+  model: "APX6000"
+  inCarMode: "APX4500"
+
+# Server connection settings
+systems:
+  - name: "City System"
+    address: "whackerlink.example.com"
+    port: 3000
+    authKey: "super-secret-auth-key-here"
+    
+  - name: "County System"
+    address: "county.whackerlink.net"  
+    port: 3001
+    authKey: "county-auth-key"
+
+# Channel organization
+zones:
+  - name: "Police"
+    channels:
+      - name: "PD Dispatch"
+        system: "City System"
+        talkgroup: 2001
+      - name: "PD Tactical 1"
+        system: "City System"
+        talkgroup: 2002
+      - name: "PD Tactical 2"
+        system: "City System"
+        talkgroup: 2003
+        
+  - name: "Fire/EMS"
+    channels:
+      - name: "Fire Dispatch"
+        system: "City System"
+        talkgroup: 3001
+      - name: "EMS Primary"
+        system: "City System"
+        talkgroup: 4001
+      - name: "Hospital"
+        system: "County System"
+        talkgroup: 4050
+        
+  - name: "Public Works"
+    channels:
+      - name: "DPW Operations"
+        system: "City System"
+        talkgroup: 5001
+      - name: "Water Department"
+        system: "City System"
+        talkgroup: 5010
+
+# Scanning configurations
+scanLists:
+  - name: "Police Full"
+    channels:
+      - "PD Dispatch"
+      - "PD Tactical 1"
+      - "PD Tactical 2"
+      
+  - name: "Emergency Services"
+    channels:
+      - "PD Dispatch"
+      - "Fire Dispatch"
+      - "EMS Primary"
+      
+  - name: "All Channels"
+    channels:
+      - "PD Dispatch"
+      - "PD Tactical 1"
+      - "PD Tactical 2"
+      - "Fire Dispatch"
+      - "EMS Primary"
+      - "Hospital"
+      - "DPW Operations"
+      - "Water Department"
+```
+
+## Supported Radio Models
+
+WhackerLinkFiveM supports various realistic radio models with authentic interfaces:
+
+### Portable Radios
+- **APX6000** - Standard P25 portable radio
+- **APX6000XE** - Enhanced portable with expanded features
+- **APX7000** - Advanced P25 portable
+- **APX7000XE** - Enhanced version of APX7000
+- **APX8000XE** - High-end portable radio
+- **APX900** - Compact P25 radio
+- **E5** - Basic digital radio
+
+### Mobile Radios
+- **APX4500** - Vehicle-mounted radio
+- **APX4500-G** - Government variant
+- **XTL2500** - Mobile P25 radio
+
+### Control Stations
+- **APXNext** - Next-generation control station interface
+
+### Scanners
+- **SRX2200** - Base/mobile scanner
+- **UNIG5** - Scanner with advanced features
+
+### Radio Model Configuration
+```yaml
+radioWide:
+  model: "APX6000"            # Default handheld model
+  inCarMode: "APX4500"        # Automatically used in vehicles
+  
+# Models automatically switch based on player state:
+# - Walking/on foot: Uses 'model' setting
+# - In vehicle: Uses 'inCarMode' setting  
+```
+
+## Advanced Configuration
+
+### Multiple Codeplugs
+Create different codeplugs for different roles:
+
+```yaml
+# codeplugs/police.yml - Police-specific configuration
+# codeplugs/fire.yml - Fire department configuration  
+# codeplugs/civilian.yml - Civilian/basic configuration
+```
+
+Players can switch codeplugs using: `/set_codeplug <name>`
+
+### Emergency Configuration
+```yaml
+# In your codeplug
+emergency:
+  timeout: 300000             # 5 minute emergency timeout
+  autoCancel: true            # Auto-cancel after timeout
+  priorityTalkgroups:         # Emergency-priority channels
+    - 2001                    # Police dispatch
+    - 3001                    # Fire dispatch
+```
+
+### Geographic Coverage
+Configure realistic radio coverage based on player location:
+
+```yaml
+# sites.yml with coverage areas
+sites:
+  1:
+    name: "Downtown Tower"
+    siteID: 1
+    lat: 40.7128
+    lng: -74.0060
+    State: 1
+    coverage:
+      radius: 5000            # Coverage radius in meters
+      signal: 5               # Signal strength (1-5)
+```
+
+## Testing Your Configuration
+
+### Validate Configuration Files
+1. Start your FiveM server
+2. Check console for YAML parsing errors
+3. Look for successful codeplug loading messages
+
+### In-Game Testing
+1. Use `/set_codeplug <your-codeplug-name>`
+2. Set your radio ID: `/set_rid 1234`
+3. Open the radio interface
+4. Test voice communications
+5. Verify zone/channel switching
+6. Test emergency functions
+
+### Common Validation Commands
+```bash
+# Set up for testing
+/set_rid 1001
+/set_codeplug default
+/toggle_radio
+
+# Test site status changes
+/site_status 1 0  # Take site offline
+/site_status 1 1  # Bring site online
+/site_status 1 2  # Set failsoft mode
+
+# Test emergency
+/emergency_toggle
+```
+
+## Performance Optimization
+
+### Large Server Considerations
+- Use dedicated WhackerLink server instances
+- Limit concurrent voice channels  
+- Configure appropriate site coverage areas
+- Monitor server performance metrics
+
+### Memory Usage
+- Minimize number of active codeplugs
+- Use efficient talkgroup numbering
+- Regularly clean up unused configurations
+
+---
+
+:::tip Configuration Best Practices
+- Test configurations in a development environment first
+- Use meaningful names for zones, channels, and talk groups
+- Document your talkgroup assignments
+- Regularly backup your configuration files
+:::
+
+:::warning YAML Syntax
+YAML is sensitive to indentation and formatting. Use spaces, not tabs, and maintain consistent indentation levels. Invalid YAML will prevent the resource from loading properly.
+:::

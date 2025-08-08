@@ -1,0 +1,194 @@
+# Installation
+
+:::danger
+This content is AI generated and may not be accurate. This page is still under development.
+:::
+
+This guide will walk you through installing WhackerLinkFiveM on your FiveM server.
+
+## Prerequisites
+
+Before installing WhackerLinkFiveM, ensure you have:
+
+- A FiveM server running
+- WhackerLink v4 server instance (see [WhackerLink v4 Installation](/docs/whackerlink_v4/installation))
+- Server administrator access
+- Basic knowledge of FiveM resource management
+
+## Download WhackerLinkFiveM
+
+### Method 1: GitHub Releases (Recommended)
+
+1. Visit the [WhackerLinkFiveM GitHub repository](https://github.com/WhackerLink/WhackerLinkFiveM)
+2. Navigate to the **Releases** section
+3. Download the latest stable release
+4. Extract the downloaded archive
+
+### Method 2: Clone from Source
+
+```bash
+git clone https://github.com/WhackerLink/WhackerLinkFiveM.git
+```
+
+## Installation Steps
+
+### 1. Copy Resource Files
+
+1. Navigate to your FiveM server directory
+2. Locate the `resources` folder
+3. Copy the `WhackerLinkFiveM` folder into your `resources` directory
+
+Your directory structure should look like:
+```
+FiveM Server/
+├── resources/
+│   ├── [other resources]/
+│   └── WhackerLinkFiveM/
+│       ├── client/
+│       ├── server/
+│       ├── configs/
+│       ├── codeplugs/
+│       └── fxmanifest.lua
+```
+
+### 2. Configure Server Settings
+
+Add WhackerLinkFiveM to your server configuration:
+
+#### server.cfg
+```bash
+# Add to your server.cfg
+ensure WhackerLinkFiveM
+```
+
+#### permissions.cfg (Optional)
+```bash
+# Grant permissions for radio commands (optional)
+add_ace group.admin whackerlinkfivem.admin allow
+add_ace group.moderator whackerlinkfivem.set_rid allow
+```
+
+### 3. Basic Configuration
+
+Before starting the resource, you need to configure basic settings:
+
+#### Edit configs/config.yml
+```yaml
+# Basic configuration
+audio:
+  beepVolumeReduction: 0.3  # Reduce beep volume (0.0-1.0)
+  
+display:
+  blipsEnabled: true        # Show site blips on map
+  
+debug:
+  enabled: false           # Enable debug mode
+```
+
+#### Edit configs/sites.yml
+Configure your WhackerLink sites:
+
+```yaml
+sites:
+  1:
+    name: "Site 1"
+    siteID: 1
+    lat: 40.7128
+    lng: -74.0060
+    State: 1  # 1 = Online, 0 = Offline, 2 = Failsoft
+  2:
+    name: "Site 2" 
+    siteID: 2
+    lat: 40.7589
+    lng: -73.9851
+    State: 1
+```
+
+### 4. Set Up Codeplugs
+
+Codeplugs define radio configurations including zones, channels, and talk groups.
+
+#### Create a basic codeplug in codeplugs/default.yml:
+```yaml
+radioWide:
+  model: "APX6000"        # Radio model
+  inCarMode: "APX4500"    # In-vehicle radio model
+  
+systems:
+  - name: "Main System"
+    address: "your-whackerlink-server.com"  # Your WhackerLink server
+    port: 3000
+    authKey: "your-auth-key"
+    
+zones:
+  - name: "Zone 1"
+    channels:
+      - name: "PD Dispatch"
+        system: "Main System"
+        talkgroup: 2001
+      - name: "PD Tactical"
+        system: "Main System" 
+        talkgroup: 2002
+        
+scanLists:
+  - name: "PD Scan"
+    channels:
+      - "PD Dispatch"
+      - "PD Tactical"
+```
+
+### 5. Start the Resource
+
+1. Start your FiveM server
+2. The resource should load automatically if added to `server.cfg`
+3. Check the server console for any error messages
+
+### 6. Verify Installation
+
+#### Server Console Output
+You should see:
+```
+============================================================
+==                                                        ==
+==                   WhackerLinkFiveM                     ==
+==             Author: Caleb, K4PHP (_php_)               ==
+==             GitHub: https://github.com/WhackerLink     ==
+==                                                        ==
+============================================================
+WhackerLinkFiveM - FiveM client/interface for WhackerLinkServer
+Copyright (C) 2024-2025 Caleb, K4PHP and WhackerLink contributors
+```
+
+#### In-Game Testing
+1. Connect to your FiveM server
+2. Use `/set_rid 1234` to set your radio ID
+3. Use `/set_codeplug default` to load the codeplug
+4. Press the configured key to open the radio interface
+
+## Default Commands
+
+After installation, these commands are available:
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/set_rid <id>` | Set your radio ID | `/set_rid 1234` |
+| `/set_codeplug <name>` | Load a codeplug | `/set_codeplug default` |
+| `/site_status <site> <status>` | Change site status | `/site_status 1 0` |
+| `/toggle_radio` | Open/close radio | `/toggle_radio` |
+| `/emergency_toggle` | Activate emergency | `/emergency_toggle` |
+
+## Next Steps
+
+- [Configure your codeplugs and radio settings →](/docs/whackerlinkfivem/configuration)
+- [Learn how to use the radio system →](/docs/whackerlinkfivem/usage)
+- [Troubleshoot common issues →](/docs/whackerlinkfivem/troubleshooting)
+
+---
+
+:::warning Important
+Make sure your WhackerLink v4 server is running and accessible before connecting clients. The FiveM resource is just the client interface.
+:::
+
+:::tip Server Performance
+WhackerLinkFiveM is designed to be lightweight. However, with many concurrent users, monitor your server performance and consider using a dedicated WhackerLink server instance.
+:::
