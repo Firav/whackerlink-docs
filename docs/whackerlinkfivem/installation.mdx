@@ -1,8 +1,7 @@
+---
+sidebar_position: 1
+---
 # Installation
-
-:::danger
-This content is AI generated and may not be accurate. This page is still under development.
-:::
 
 This guide will walk you through installing WhackerLinkFiveM on your FiveM server.
 
@@ -15,14 +14,18 @@ Before installing WhackerLinkFiveM, ensure you have:
 - Server administrator access
 - Basic knowledge of FiveM resource management
 
+:::warning
+You must have a WhackerLink v4 server to use WhackerLinkFiveM. If you do not have a server, consider using a managed hosting service like [Smoky Ridge Solutions](https://smokyridge.solutions/) or follow the [self-host installation guide](/docs/whackerlink_v4/installation) to set up your own server.
+:::
+
 ## Download WhackerLinkFiveM
 
 ### Method 1: GitHub Releases (Recommended)
 
 1. Visit the [WhackerLinkFiveM GitHub repository](https://github.com/WhackerLink/WhackerLinkFiveM)
-2. Navigate to the **Releases** section
-3. Download the latest stable release
-4. Extract the downloaded archive
+2. Click the green **Code** button
+3. Select **Download ZIP** to download the source code
+4. Extract the downloaded ZIP archive
 
 ### Method 2: Clone from Source
 
@@ -36,7 +39,8 @@ git clone https://github.com/WhackerLink/WhackerLinkFiveM.git
 
 1. Navigate to your FiveM server directory
 2. Locate the `resources` folder
-3. Copy the `WhackerLinkFiveM` folder into your `resources` directory
+3. Copy the `WhackerLinkFiveM-main` folder into your `resources` directory
+4. Rename the folder to `WhackerLinkFiveM`
 
 Your directory structure should look like:
 ```
@@ -61,80 +65,75 @@ Add WhackerLinkFiveM to your server configuration:
 ensure WhackerLinkFiveM
 ```
 
-#### permissions.cfg (Optional)
-```bash
-# Grant permissions for radio commands (optional)
-add_ace group.admin whackerlinkfivem.admin allow
-add_ace group.moderator whackerlinkfivem.set_rid allow
-```
-
 ### 3. Basic Configuration
 
-Before starting the resource, you need to configure basic settings:
-
-#### Edit configs/config.yml
-```yaml
-# Basic configuration
-audio:
-  beepVolumeReduction: 0.3  # Reduce beep volume (0.0-1.0)
-  
-display:
-  blipsEnabled: true        # Show site blips on map
-  
-debug:
-  enabled: false           # Enable debug mode
-```
-
-#### Edit configs/sites.yml
-Configure your WhackerLink sites:
+Before starting the resource, you need to configure basic settings.
+Navigate to the `configs` folder inside `WhackerLinkFiveM` and open `config.yml`:
 
 ```yaml
-sites:
-  1:
-    name: "Site 1"
-    siteID: 1
-    lat: 40.7128
-    lng: -74.0060
-    State: 1  # 1 = Online, 0 = Offline, 2 = Failsoft
-  2:
-    name: "Site 2" 
-    siteID: 2
-    lat: 40.7589
-    lng: -73.9851
-    State: 1
+# Radio beep volume setting, recommended to keep at 0.6
+beepVolumeReduction: 0.6  # Reduce beep volume (0.0-1.0)
+
+# Select whether to show site blips on the map or not
+siteBlips: true        # Show site blips on map
 ```
+
+#### Edit configs/sites.yml (optional)
+
+The sites defined by default should cover the entire map. You can modify site names and locations as needed.
+At the bottom of this file there is also a Roxwood West site that you can uncomment if you are using the Roxwood expansion.
+:::note
+If you uncomment the Roxwood West site, ensure you also update your WhackerLink v4 server configuration to include this site.
+:::
 
 ### 4. Set Up Codeplugs
 
+WhackerLinkFiveM comes with an [example codeplug](https://github.com/WhackerLink/WhackerLinkFiveM/blob/main/codeplugs/codeplug.example.yml) that you can use as a starting point.
 Codeplugs define radio configurations including zones, channels, and talk groups.
 
-#### Create a basic codeplug in codeplugs/default.yml:
+#### Copy codeplugs/codeplug.example.yml and rename it
+
+Once you have copied the example file, rename it, open it and customize it to fit your server's radio setup.
+
+#### Radio wide configuration values
 ```yaml
 radioWide:
-  model: "APX6000"        # Radio model
-  inCarMode: "APX4500"    # In-vehicle radio model
-  
+  hostVersion: "R01.00.00" # Radio firmware version (visual only)
+  codeplugVersion: "R01.00.00" # Codeplug version (visual only)
+  radioAlias: "" # Radio alias are not implemented yet
+  serialNumber: "123ABC1234" # Radio serial number (visual only)
+  model: "APX6000" # Radio model for handheld version
+  inCarMode: "APX4500" # Radio model for in-car(mobile) version
+```
+#### Radio systems configuration (your WLS server)
+```yaml
 systems:
-  - name: "Main System"
-    address: "your-whackerlink-server.com"  # Your WhackerLink server
-    port: 3000
-    authKey: "your-auth-key"
-    
+  - name: "System 1" # System name (visual only) -- Must match other references of the system name however.
+    # This address is the Public IP of your Whackerlink Server. If hosted in a VPS, it is your Public IP of the VPS.
+    # If hosted locally, this is the Public IP of your Network.
+    address: "localhost" # If you're using this publically, you will need to change this to your public IP or domain name.
+    authKey: "SuperSecretKey1" # Authentication key, must match the key in your WhackerLink v4 server auth_keys.yml file.
+    port: 3000 # Port number, must match the port in your WhackerLink v4 server config.yml file.
+    rid: null # Optional default Radio ID for this system (can be overridden in-game) -- Recommended to keep null
+```
+#### Codeplug zones and channels configuration
+```yaml 
 zones:
-  - name: "Zone 1"
+  - name: "Zone 1" # Display name of the zone
     channels:
-      - name: "PD Dispatch"
-        system: "Main System"
-        talkgroup: 2001
+      - name: "PD Dispatch" # Display name of the channel
+        system: "System 1" # Must match a defined system name in the above systems section
+        talkgroup: 2001 # Talkgroup ID, unique identifier for the channel. If matching in another codeplug, you can hear each other.
+        scanList: List 1 # Optional scan list name, must match a defined scan list name in the scanLists section below
       - name: "PD Tactical"
-        system: "Main System" 
+        system: "System 1"
         talkgroup: 2002
         
 scanLists:
-  - name: "PD Scan"
+  - name: List 1 # Scan list name, must match scanList references in channels above
     channels:
-      - "PD Dispatch"
-      - "PD Tactical"
+      - zone: Zone 1 # Must match a defined zone name in the zones section above
+        channel: PD Dispatch # Must match a defined channel name in the zones section above
 ```
 
 ### 5. Start the Resource
@@ -162,20 +161,8 @@ Copyright (C) 2024-2025 Caleb, K4PHP and WhackerLink contributors
 #### In-Game Testing
 1. Connect to your FiveM server
 2. Use `/set_rid 1234` to set your radio ID
-3. Use `/set_codeplug default` to load the codeplug
-4. Press the configured key to open the radio interface
-
-## Default Commands
-
-After installation, these commands are available:
-
-| Command | Description | Example |
-|---------|-------------|---------|
-| `/set_rid <id>` | Set your radio ID | `/set_rid 1234` |
-| `/set_codeplug <name>` | Load a codeplug | `/set_codeplug default` |
-| `/site_status <site> <status>` | Change site status | `/site_status 1 0` |
-| `/toggle_radio` | Open/close radio | `/toggle_radio` |
-| `/emergency_toggle` | Activate emergency | `/emergency_toggle` |
+3. Use `/set_codeplug codeplug_name` to load the codeplug
+4. Press the radio focus key to click on the radio interface. Turn on the radio via the radial button.
 
 ## Next Steps
 
@@ -185,10 +172,9 @@ After installation, these commands are available:
 
 ---
 
-:::warning Important
-Make sure your WhackerLink v4 server is running and accessible before connecting clients. The FiveM resource is just the client interface.
-:::
+## Need Help?
 
-:::tip Server Performance
-WhackerLinkFiveM is designed to be lightweight. However, with many concurrent users, monitor your server performance and consider using a dedicated WhackerLink server instance.
+Join our [Discord community](https://discord.gg/FeQMmc33VV) for support, live assistance, and updates.
+:::note
+WhackerLink is a free, open-source project maintained by volunteers. Support is provided as time allows, but response times may vary. Please be patient when seeking assistance.
 :::
