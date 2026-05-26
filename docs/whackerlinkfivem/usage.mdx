@@ -3,10 +3,6 @@ sidebar_position: 3
 ---
 # How to Use
 
-:::danger
-This content is AI generated and may not be accurate. This page is still under development.
-:::
-
 Learn how to operate WhackerLinkFiveM's radio system effectively, including basic operations, advanced features, and best practices for roleplay scenarios.
 
 ## Getting Started
@@ -17,12 +13,16 @@ Learn how to operate WhackerLinkFiveM's radio system effectively, including basi
    /set_rid 1234
    ```
 
-2. **Load a Codeplug**: `/set_codeplug <codeplug_name>`
+2. **Load a Codeplug**: `/set_codeplug <codeplug_name>` (the name of your codeplug is the filename without the .yml extension)
    ```
    /set_codeplug police
    ```
 
-3. **Open the Radio**: Use the configured keybind or `/toggle_radio`
+3. **Turn on the radio**: The radio should automatically show whenever you use `/set_codeplug`. If it doesn't, use the default keybind 'Y' to toggle the radio interface.
+Once its visible, press the power button on the radio interface to turn it on by setting your radio focus (default `F` key) or by pressing the power toggle keybind (default `P` key).
+
+4. **Allow the resource to use your microphone**: When you power up the radio for the first time, you'll get a pop-up from FiveM asking for permission to use your microphone.
+Press F8 to open the console window and click the "Allow" button for the prompt.
 
 ### Basic Radio Interface
 
@@ -35,30 +35,19 @@ When you open the radio, you'll see:
 ## Basic Operations
 
 ### Powering On/Off
-- **Power Toggle**: Press the power button on the radio interface
-- **Command**: `/power_toggle` (if keybind is set)
-- **Auto-Power**: Radio powers on automatically when opening interface
+- **Power Toggle**: Press the power button on the radio interface (radial button commonly on the top right)
+- **Default Keybind**: `P` (can be customized in FiveM keybind settings)
 
 ### Changing Channels
-- **Channel Up**: Use channel up button or assigned keybind
-- **Channel Down**: Use channel down button or assigned keybind  
-- **Commands**: 
-  ```
-  /channel_up
-  /channel_down
-  ```
+- **Channel Up**: Use channel up button or default keybind `PAGEUP`
+- **Channel Down**: Use channel down button or default keybind `PAGEDOWN`
 
 ### Changing Zones
-- **Zone Up**: Use zone up button or assigned keybind
-- **Zone Down**: Use zone down button or assigned keybind
-- **Commands**:
-  ```
-  /zone_up
-  /zone_down
-  ```
+- By default, the zone up/down keybinds are unset. You can assign them in FiveM settings
+- **Zone Up**: Press the ZnUp button on the radio interface.
 
 ### Push-to-Talk (PTT)
-1. **Hold PTT Key**: Press and hold your configured PTT key
+1. **Hold PTT Key**: Press and hold your configured PTT key (default key 'N')
 2. **Voice Transmission**: Speak while holding PTT
 3. **Release PTT**: Release key to stop transmission
 
@@ -73,16 +62,13 @@ When you open the radio, you'll see:
 
 #### Emergency Activation
 - **Emergency Button**: Press the orange emergency button on radio
-- **Command**: `/emergency_toggle`
-- **Keybind**: Use configured emergency keybind
+- **Keybind**: Use configured emergency keybind (default key 'E')
 
 **Emergency Features**:
-- Sends emergency alarm to dispatch
-- Includes GPS location data
-- Priority transmission capabilities
+- Sends emergency alarm to dispatch and other units on same TGID
 - Visual/audio emergency indicators
 
-#### Emergency Response
+#### Emergency Activation Behavior
 When receiving an emergency:
 - Orange emergency indicator appears
 - Emergency tone plays
@@ -121,13 +107,8 @@ When receiving an emergency:
 - **Resolution**: Move to area with better coverage
 
 ### Volume Controls
-- **Volume Up**: Increase audio volume
-- **Volume Down**: Decrease audio volume
-- **Commands**:
-  ```
-  /volume_up
-  /volume_down
-  ```
+- **Volume Up**: Increase audio volume (by default, no keybind assigned)
+- **Volume Down**: Decrease audio volume (by default, no keybind assigned)
 
 ## Radio Models and Features
 
@@ -144,64 +125,12 @@ When receiving an emergency:
 - No battery indicator (powered by vehicle)
 - Fixed mounting position
 
-### Scanner Models (SRX2200, UNIG5)
+### Scanner Models (UNIG5)
 - Receive-only operation
 - No PTT functionality
 - Enhanced scanning features
-- Multiple display modes
 
-## Commands Reference
-
-### Essential Commands
-| Command | Description | Example |
-|---------|-------------|---------|
-| `/set_rid <id>` | Set your radio ID | `/set_rid 1234` |
-| `/set_codeplug <name>` | Load codeplug configuration | `/set_codeplug police` |
-| `/toggle_radio` | Open/close radio interface | `/toggle_radio` |
-
-### Operational Commands  
-| Command | Description | Example |
-|---------|-------------|---------|
-| `/emergency_toggle` | Activate emergency alarm | `/emergency_toggle` |
-| `/channel_up` | Switch to next channel | `/channel_up` |
-| `/channel_down` | Switch to previous channel | `/channel_down` |
-| `/zone_up` | Switch to next zone | `/zone_up` |
-| `/zone_down` | Switch to previous zone | `/zone_down` |
-
-### Administrative Commands
-| Command | Description | Example |
-|---------|-------------|---------|
-| `/site_status <site> <status>` | Change site status | `/site_status 1 0` |
-| `/clear_codeplug` | Clear current codeplug | `/clear_codeplug` |
-| `/change_battery` | Reset battery level | `/change_battery` |
-
-### Site Status Values
-- **1**: Site online (normal operation)
-- **0**: Site offline (no service)
-- **2**: Site failsoft (limited service)
-
-## Keybinds Configuration
-
-### Default Keybinds
-WhackerLinkFiveM supports customizable keybinds through FiveM's key mapping system:
-
-- **PTT**: Not set by default (configure in FiveM settings)
-- **Toggle Radio**: Not set by default
-- **Emergency**: Not set by default
-- **Channel Up/Down**: Not set by default
-- **Zone Up/Down**: Not set by default
-
-### Setting Up Keybinds
-1. Access FiveM settings (F1 → Settings → Key Bindings)
-2. Find "WhackerLinkFiveM" category
-3. Assign keys for each function:
-   - `whackerlinkfivem_ptt` - Push to Talk
-   - `whackerlinkfivem_radio` - Toggle Radio
-   - `whackerlinkfivem_emergency` - Emergency
-   - `whackerlinkfivem_channel_up` - Channel Up
-   - `whackerlinkfivem_channel_down` - Channel Down
-
-## Roleplay Best Practices
+## Radio Use Best Practices
 
 ### Radio Discipline
 - **Clear Speech**: Speak clearly and at appropriate volume
@@ -224,46 +153,6 @@ Example proper radio traffic:
 "Copy, Unit 1-Adam-12 10-8 at 1430 hours"
 ```
 
-## Troubleshooting In-Game Issues
-
-### Common Problems
-
-#### "No Signal" or "Out of Range"
-- **Cause**: Too far from radio sites
-- **Solution**: Move closer to configured site locations
-- **Check**: Site status with RSSI button
-
-#### "Site Trunking" Message
-- **Cause**: Radio searching for available sites
-- **Solution**: Wait for connection or move to covered area
-- **Duration**: Usually resolves within 2-5 seconds
-
-#### Voice Not Working
-- **Check**: PTT key is properly configured
-- **Verify**: Microphone permissions in FiveM
-- **Confirm**: On correct talkgroup/channel
-- **Test**: Radio ID is properly set
-
-#### Radio Interface Not Opening
-- **Verify**: Resource is running on server
-- **Check**: Keybind assignments
-- **Try**: `/toggle_radio` command
-- **Confirm**: No conflicting resources
-
-### Performance Issues
-
-#### Audio Latency
-- **Reduce**: Background applications
-- **Check**: Network connection quality
-- **Adjust**: FiveM audio settings
-- **Consider**: Server performance
-
-#### Frame Rate Drops
-- **Minimize**: Radio interface when not needed
-- **Disable**: Unnecessary visual effects
-- **Update**: Graphics drivers
-- **Lower**: FiveM graphics settings
-
 ## Tips for Server Administrators
 
 ### Player Education
@@ -280,10 +169,15 @@ Example proper radio traffic:
 
 ---
 
-:::tip Pro Tip
-Practice radio operations in a private server or development environment before using in serious roleplay scenarios. Familiarity with the interface improves immersion and reduces mistakes.
-:::
+## Next Steps
 
-:::note Realistic Behavior
-WhackerLinkFiveM simulates real P25 radio behavior. Features like site trunking, emergency alarms, and signal strength are designed to provide authentic radio experiences.
+- [Troubleshoot common issues →](/docs/whackerlinkfivem/troubleshooting)
+
+---
+
+## Need Help?
+
+Join our [Discord community](https://discord.gg/FeQMmc33VV) for support, live assistance, and updates.
+:::note
+WhackerLink is a free, open-source project maintained by volunteers. Support is provided as time allows, but response times may vary. Please be patient when seeking assistance.
 :::

@@ -22,11 +22,28 @@ siteBlips: true # Show site blips on map
 disableAnimations: false # Disable character animations when using the radio
 # Beep volume reduction factor. 0.0 is full volume, 1.0 is silent
 beepVolumeReduction: 0.6 # Radio beep volume setting, recommended to keep at 0.6
+# Audio gain settings for incoming radio audio
+audioGain: # Audio gain section -- good for adjusting incoming/outgoing audio levels if they are too loud or quiet
+           # If you end up using this section, you will need to fiddle with it for a bit before finding the right settings for your server and audio setup. 
+           # Start with small adjustments and test in-game to find the right balance.
+  # Input gain multiplier applied to raw audio data (1.0 = no change, 2.0 = double amplitude)
+  # Higher values may cause distortion. Recommended range: 0.5 - 3.0
+  inputGain: 1.0
+  # Output gain multiplier applied through Web Audio API (1.0 = no change)  
+  # This is cleaner than input gain and less likely to distort. Recommended range: 1.0 - 2.0
+  outputGain: 1.0
+  # Enable/disable audio gain processing
+  enabled: true
 ```
 
 ## Site Configuration (sites.yml)
 
 Sites represent physical radio tower locations that provide coverage areas.
+The default configuration file provides adequate coverage for the entire map, but you can customize site locations, frequencies, and coverage areas as needed for your server.
+
+:::tip
+Remember: If you change anything in this sites.yml file, you will also need to [update your WhackerLink v4 server configuration](https://github.com/WhackerLink/whackerlink_v4/blob/8a8def569a382e30bcb1151467fb330d064311a2/WhackerLinkServer/configs/config.example.yml#L83) to match the site names, frequencies, and system/site IDs.
+:::
 
 ### Basic Site Structure
 ```yaml
@@ -45,86 +62,6 @@ sites:
     systemID: 1 # System ID as defined in WLS server config
     siteID: 1 # Unique site ID within the system
     range: 1.5 # Coverage radius within FiveM
-
-  - name: "Central-West Site"
-    controlChannel: "852.8875"
-    voiceChannels:
-      - "857.2625"
-      - "857.4375"
-      - "851.7375"
-    location:
-      X: -2312.05
-      Y: 336.79
-      Z: 188.6
-    systemID: 1
-    siteID: 2
-    range: 1.0
-
-  - name: "City-FBI Site"
-    controlChannel: "773.66875"
-    voiceChannels:
-      - "774.89375"
-      - "772.11875"
-      - "771.06875"
-      - "770.04375"
-      - "769.28125"
-    location:
-      X: 148.69
-      Y: -770.36
-      Z: 262.85
-    systemID: 1
-    siteID: 3
-    range: 2.0
-
-  - name: "North-East Site"
-    controlChannel: "854.9625"
-    voiceChannels:
-      - "853.2125"
-      - "852.6625"
-      - "852.0375"
-      - "851.7125"
-      - "773.16875"
-      - "769.36875"
-    location:
-      X: 1869.07
-      Y: 3715.00
-      Z: 33.06
-    systemID: 1
-    siteID: 4
-    range: 1.5
-
-  - name: "North-Central Site"
-    controlChannel: "856.7625"
-    voiceChannels:
-      - "855.4625"
-      - "855.2125"
-      - "852.9125"
-      - "852.0625"
-    location:
-      X: 450.82
-      Y: 5567.40
-      Z: 796.62
-    systemID: 1
-    siteID: 5
-    range: 2.0
-
-    ###
-    # Uncomment the following if your FiveM server has Roxwood
-    ###
-
-#  - name: "Roxwood West Site"
-#    controlChannel: "854.5125"
-#    voiceChannels:
-#        - "853.8625"
-#        - "853.3125"
-#        - "852.6125"
-#    location:
-#        X: -1707.05
-#        Y: 6824.27
-#        Z: 94.5
-#    systemID: 2
-#    siteID: 7
-#    range: 1.0
 ```
 
 ## Codeplug Configuration
@@ -225,7 +162,7 @@ This list is not exhaustive and more models may be added in future updates. Plea
 3. Look for successful codeplug loading messages
 
 ### In-Game Testing
-1. Use `/set_codeplug <your-codeplug-name>`
+1. Use `/set_codeplug <your-codeplug-name>` (the name of your codeplug is the filename without the .yml extension)
 2. Set your radio ID: `/set_rid 1234`
 3. Open the radio interface
 4. Test voice communications
@@ -235,3 +172,12 @@ This list is not exhaustive and more models may be added in future updates. Plea
 
 - [Learn how to use the radio system →](/docs/whackerlinkfivem/usage)
 - [Troubleshoot common issues →](/docs/whackerlinkfivem/troubleshooting)
+
+---
+
+## Need Help?
+
+Join our [Discord community](https://discord.gg/FeQMmc33VV) for support, live assistance, and updates.
+:::note
+WhackerLink is a free, open-source project maintained by volunteers. Support is provided as time allows, but response times may vary. Please be patient when seeking assistance.
+:::
