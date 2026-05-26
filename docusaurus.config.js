@@ -74,8 +74,14 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
+      image: 'img/whackerlink-logo.png',
+      metadata: [
+        {name: 'description', content: 'WhackerLink Documentation - Official documenmtation for WhackerLink and its related projects.'},
+        {property: 'og:description', content: 'WhackerLink Documentation - Official documenmtation for WhackerLink and its related projects.'},
+        {property: 'og:image', content: 'img/whackerlink-logo.png'},
+        {name: 'twitter:card', content: 'summary_large_image'},
+        {name: 'twitter:image', content: 'img/whackerlink-logo.png'},
+      ],
       navbar: {
         logo: {
           alt: 'WhackerLink Logo',
